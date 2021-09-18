@@ -23,6 +23,7 @@ max_prezzo= np.max(prezzi)
 
 p=context.probabilities
 c=np.zeros(10)
+
 for i in range(0,9):
     c[i]=(p[0][i]+p[1][i]+p[2][i])/3
 
@@ -35,6 +36,8 @@ n_experiment=50
 ts_rewards=[] #reward per gli esperimenti del ts algorithm
 ucb1_rewards=[] #reward per gli esperimenti dell'algoritmo ucb1
 
+fixedBid=1.0
+
 totalRevenueTS=[]
 totalRevenueUCB1=[]
 dailyTS=0
@@ -46,7 +49,7 @@ cumRewardUCB1=0
 
 
 
-nrClick=500
+
 
 
 
@@ -55,6 +58,10 @@ ts_learner= TS_Learner(n_arms=n_arms)
 ucb1_learner= UCB1(n_arms= n_arms)
 for t in range (0,T):
     
+    
+    
+    nrClick=context.nrDailyClick(fixedBid)
+    costPerClick=context.costPerClick(fixedBid)
     #pull TS arm
     pulled_armTS=ts_learner.pull_arm() #prendo l'arm
     
@@ -68,7 +75,7 @@ for t in range (0,T):
         
         reward= env.round(pulled_armTS) #calcolo il reward
         cumRewardTS+=reward*(prezzi[pulled_armTS]/max_prezzo)
-        dailyTS+=reward*prezzi[pulled_armTS]
+        dailyTS+=reward*prezzi[pulled_armTS]-costPerClick
         
         
         #totalRevenueTS=totalRevenueTS.append(prezzi[pulled_arm])
@@ -79,7 +86,7 @@ for t in range (0,T):
         
         reward=env.round(pulled_armUCB1)
         cumRewardUCB1+=reward*(prezzi[pulled_armTS]/max_prezzo)
-        dailyUCB1+=reward*prezzi[pulled_armUCB1]
+        dailyUCB1+=reward*prezzi[pulled_armUCB1]-costPerClick
         #totalRevenueUCB1=totalRevenueUCB1.append(prezzi[pulled_arm])
         #ucb1_learner.update(pulled_arm, reward)
     

@@ -25,9 +25,9 @@ class contextEnv():
     def nextTimeProbability(month):
         return(month/(2+month))
     
-    def nrDailyClick(bid):
+    def nrDailyClick(self,bid):
         meanNrClick = math.trunc(500*math.tanh(bid))
-        nrClick= math.trunc(np.random.uniform(meanNrClick-0.05*meanNrClick, meanNrClick+0.05*meanNrClick,1))
+        nrClick= math.trunc(np.random.uniform(meanNrClick-0.05*meanNrClick, meanNrClick+0.05*meanNrClick,1)[0])
         return nrClick
     
     def costPerClick(self, bid):
