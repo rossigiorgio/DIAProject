@@ -7,11 +7,14 @@ Spyder Editor
 import json
 import numpy as np
 import math
+import os 
 
 class contextEnv():
     
     def __init__(self):
-        with open('C:/Users/MorganaGiorgio/PricingAdvertising/ProjectEnviroment/pricing_config.json') as json_file:
+        dirname = os.path.dirname(__file__)
+        path = os.path.join(dirname, 'pricing_config.json')
+        with open(path) as json_file:
             data = json.load(json_file)
         self.name=data["product"][0]["name"]
         self.features=data["product"][0]["features"]
@@ -27,9 +30,9 @@ class contextEnv():
         nrClick= math.trunc(np.random.uniform(meanNrClick-0.05*meanNrClick, meanNrClick+0.05*meanNrClick,1))
         return nrClick
     
-    def costPerClick(bid):
+    def costPerClick(self, bid):
         s= np.random.uniform(bid-0.05*bid, bid+0.05*bid,1)
-        return(s)
+        return s
         
     def conversionRateFunctionMale(price):
         rate=0.0001*(price)^3-0.0072*(price)^2+0.0842*price +0.3294
@@ -44,8 +47,8 @@ class contextEnv():
         return rate
         
 
-with open('C:/Users/MorganaGiorgio/PricingAdvertising/ProjectEnviroment/pricing_config.json') as json_file:
-    data = json.load(json_file)
+# with open('C:/Users/MorganaGiorgio/PricingAdvertising/ProjectEnviroment/pricing_config.json') as json_file:
+#     data = json.load(json_file)
 
 """
 p=(data["product"][0]["probabilities"])
