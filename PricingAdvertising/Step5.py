@@ -34,7 +34,7 @@ for i in range(0,10):
         pulled_arm = u_idx
         reward = env.round(pulled_arm)
         nof = reward * conv_prob
-        cost = context.costPerClick(env.bids[pulled_arm]) * nof
+        cost = context.costPerClick(env.bids[pulled_arm]) * reward
         profit = profit_margin * nof
         if(profit > cost):
             rp[pulled_arm] += 1
@@ -68,7 +68,7 @@ gpts_rewards_per_experiment.append(gpts_learner.collected_rewards)
 opt = np.max(env.means)
 plt.figure(0)
 plt.xlabel("t")
-plt.ylabel("Reward")
+plt.ylabel("Regret")
 plt.plot(np.cumsum(np.mean(opt - gpts_rewards_per_experiment, axis=0)), 'g')
 plt.legend(["GPTS"])
 plt.show()
