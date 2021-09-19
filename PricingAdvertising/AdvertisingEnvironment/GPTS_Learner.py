@@ -9,7 +9,7 @@ class GPTS_Learner(Learner):
         self.arms = arms
         self.means = np.zeros(n_arms)
         self.sigmas = np.ones(n_arms) * 10
-        self.revenue_probs = np.zeros(10)
+        self.revenue_probs = np.ones(10)
         self.pulled_arms = []
         alpha = 10.0
         kernel = C(1.0, (1e-3, 1e3)) * RBF(1.0, (1e-3, 1e3))
