@@ -10,7 +10,7 @@ class GTS_Learner(Learner):
 
         
     def pull_arm(self):
-        bool_arr = self.revenue_probs > 0.20
+        bool_arr = self.revenue_probs < 0.20
         idxs = np.where(bool_arr)[0]
         ms = [self.means[i] for i in idxs]
         sigs = [self.sigmas[i] for i in idxs]

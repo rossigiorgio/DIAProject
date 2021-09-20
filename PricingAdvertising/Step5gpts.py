@@ -38,10 +38,10 @@ for i in range(0,10):
         profit = profit_margin * nof
         if(profit > cost):
             rp[pulled_arm] += 1
-            gpts_learner.revenue_probs[pulled_arm] = (rp[pulled_arm]) /  (rp[pulled_arm] + rn[pulled_arm])
+            gpts_learner.revenue_probs[pulled_arm] = (rn[pulled_arm]) /  (rp[pulled_arm] + rn[pulled_arm])
         else: 
             rn[pulled_arm] += 1
-            gpts_learner.revenue_probs[pulled_arm] = (rp[pulled_arm]) /  (rp[pulled_arm] + rn[pulled_arm] + 1)
+            gpts_learner.revenue_probs[pulled_arm] = (rn[pulled_arm]) /  (rp[pulled_arm] + rn[pulled_arm] + 1)
 
         gpts_learner.update(pulled_arm, reward) 
 
@@ -55,10 +55,10 @@ for t in range(10, T):
     profit = profit_margin * nof
     if(profit > cost):
         rp[pulled_arm] += 1
-        gpts_learner.revenue_probs[pulled_arm] = (rp[pulled_arm]) /  (rp[pulled_arm] + rn[pulled_arm])
+        gpts_learner.revenue_probs[pulled_arm] = (rn[pulled_arm]) /  (rp[pulled_arm] + rn[pulled_arm])
     else: 
         rn[pulled_arm] += 1
-        gpts_learner.revenue_probs[pulled_arm] = (rp[pulled_arm]) /  (rp[pulled_arm] + rn[pulled_arm])
+        gpts_learner.revenue_probs[pulled_arm] = (rn[pulled_arm]) /  (rp[pulled_arm] + rn[pulled_arm])
     gpts_learner.update(pulled_arm, reward)
     
 

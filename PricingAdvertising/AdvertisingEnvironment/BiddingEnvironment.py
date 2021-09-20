@@ -1,12 +1,15 @@
 import numpy as np
+import math
 
-def fun(x):
-    return 100 * (1.0 - np.exp(-4*x+3*x**3)) #the function maps the bid corresponding the number of clicks
+def fun(bid):
+    meanNrClick = math.trunc(500*math.tanh(bid))
+    nrClick= math.trunc(np.random.uniform(meanNrClick-0.05*meanNrClick, meanNrClick+0.05*meanNrClick,1)[0])
+    return nrClick
 
 class BiddingEnvironment():
     def __init__(self, bids, sigma): #array of possible bids and (sigma) standard deviation of the reward function and we assume.
         self.bids = bids
-        self.means = fun(bids) #mean of reward function
+        self.means = [fun(bid) for bid in bids]#mean of reward function
         self.sigmas = np.ones(len(bids)) * sigma
 
     def round(self, pulled_arm):
