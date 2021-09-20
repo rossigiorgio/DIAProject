@@ -23,7 +23,6 @@ dailyTS = 0
 cum_rewardTS = 0 
 
 
-n_arms = 10
 min_bid = 0.0
 max_bid = 1.0
 bids = np.linspace(min_bid, max_bid, n_arms)
