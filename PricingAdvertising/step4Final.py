@@ -18,6 +18,7 @@ print(prezzi)
 p=context.probabilities
 
 fixedBid=1.0
+costPerClick=1.0
 
 
 optClass1=np.max(p[0])
@@ -31,9 +32,7 @@ n_arms=10;
 T=365
 n_experiment=50
 
-ts_rewardsC1=[] #reward per gli esperimenti del ts algorithm
-ts_rewardsC2=[] #reward per gli esperimenti del ts algorithm
-ts_rewardsC3=[] #reward per gli esperimenti del ts algorithm
+
 
 totalRevenueTS=[]
 
@@ -52,7 +51,7 @@ cumRewardTSC2=0
 cumRewardTSC3=0
 cumRewardSingle=0
 
-nrClickPerClass=167
+nrClickPerClass=127
 
 
 #for each class define a new enviroment with his respective probabilities
@@ -78,10 +77,7 @@ for t in range (0,T):
     pulled_armC3=ts_learnerClass2.pull_arm() 
     pulled_armSingle=ts_learnerSingle.pull_arm()
     
-    nrClick=context.nrDailyClick(fixedBid)
     
-    nrClickPerClass=math.trunc(nrClick/3)
-    costPerClick=context.costPerClick(fixedBid)
     
     
     #I pull a new arm every day, and i can distinguish the three different
@@ -96,7 +92,7 @@ for t in range (0,T):
         dailyTS+=reward*prezzi[pulled_armC1]-costPerClick
     
         #using single learner
-        
+ 
         reward= envClass1.round(pulled_armSingle)    
         dailyTSSingle+= reward*prezzi[pulled_armSingle]-costPerClick
         cumRewardSingle+=reward*(prezzi[pulled_armSingle]/max_prezzo)
@@ -138,10 +134,6 @@ for t in range (0,T):
     totalRevenueSingle.append(dailyTSSingle)
     
     
-    ts_rewardsC1.append(cumRewardTSC1/nrClickPerClass)  
-    ts_rewardsC2.append(cumRewardTSC2/nrClickPerClass)  
-    ts_rewardsC3.append(cumRewardTSC3/nrClickPerClass)  
-
     
     ts_learnerClass1.update(pulled_armC1,cumRewardTSC1/nrClickPerClass)
     ts_learnerClass2.update(pulled_armC2,cumRewardTSC2/nrClickPerClass)
@@ -170,7 +162,7 @@ plt.xlabel("t")
 plt.ylabel("Revenue")
 plt.plot(np.cumsum(totalRevenueTS, axis=0), 'r')
 plt.plot(np.cumsum(totalRevenueSingle, axis=0), 'y')
-plt.legend(["OptimalArm", "All C1", "Single"])
+plt.legend(["OptimalArm", "Single Learner"])
 
 
 

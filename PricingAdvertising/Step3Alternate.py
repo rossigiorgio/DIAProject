@@ -46,9 +46,9 @@ dailyUCB1=0
 cumRewardTS=0
 cumRewardUCB1=0
 
+nrClick=380
 
-
-
+costPerClick=1.0
 
 
 
@@ -60,8 +60,8 @@ for t in range (0,T):
     
     
     
-    nrClick=context.nrDailyClick(fixedBid)
-    costPerClick=context.costPerClick(fixedBid)
+   
+    
     #pull TS arm
     pulled_armTS=ts_learner.pull_arm() #prendo l'arm
     
