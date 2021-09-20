@@ -6,7 +6,7 @@ class GTS_Learner(Learner):
         super().__init__(n_arms)
         self.means = np.zeros(n_arms)
         self.sigmas = np.ones(n_arms) * 1e3
-        self.revenue_probs = np.zeros(n_arms)
+        self.revenue_probs = np.ones(n_arms)
 
         
     def pull_arm(self):

@@ -74,7 +74,7 @@ for t in range (0,T):
     #pull TS arms
     pulled_armC1=ts_learnerClass1.pull_arm() 
     pulled_armC2=ts_learnerClass2.pull_arm() 
-    pulled_armC3=ts_learnerClass2.pull_arm() 
+    pulled_armC3=ts_learnerClass3.pull_arm() 
     pulled_armSingle=ts_learnerSingle.pull_arm()
     
     
